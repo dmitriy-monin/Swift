@@ -81,8 +81,65 @@ month
 dayq
 let monthIndex = month - 1
 var sumDays = dayq
-for quantity in day[0..<monthIndex] {
-    sumDays += quantity
+for i in day[0..<monthIndex] {
+    sumDays += i
 }
 
 print("Days have passed from the \(dayq) \(mounth[month - 1]): \(sumDays)\n")
+
+/*
+ 2. Сделайте первое задание к уроку номер 4 используя массивы:
+
+ (создайте массив опшинал интов и посчитайте сумму)
+
+ - в одном случае используйте optional binding
+ - в другом forced unwrapping
+ - а в третьем оператор ??
+ 
+ 1. Создать пять строковых констант
+ Одни константы это только цифры, другие содержат еще и буквы
+ Найти сумму всех этих констант приведя их к Int
+ (Используйте и optional binding и forced unwrapping)
+*/
+
+let mass = ["10", "20", "30dhj", "40", "50fio"]
+var optionalMass = [Int?]()
+for i in mass {
+    optionalMass.append(Int(i))
+}
+
+var sum = 0
+for i in optionalMass {
+    if let int = i {
+        sum += int
+    }
+}
+print("Optional Binding: \(sum)")
+
+sum = 0
+for i in optionalMass {
+    if i != nil {
+        sum += i!
+    }
+}
+print("Forced Unwrapping: \(sum)")
+
+sum = 0
+for i in optionalMass{
+        sum += i ?? 0
+}
+print("?? : \(sum)\n")
+
+/*
+3. создайте строку алфавит и пустой массив строк
+
+ в цикле пройдитесь по всем символам строки попорядку, преобразовывайте каждый в строку и добавляйте в массив, причем так, чтобы на выходе получился массив с алфавитом задом-наперед
+ */
+
+let alphabet = "abcdefghijklmnopqrstuvwxyz"
+var reverseAlphabet = [String]()
+
+for i in alphabet.reversed() {
+    reverseAlphabet.append(String(i))
+}
+print(reverseAlphabet)
