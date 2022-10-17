@@ -42,14 +42,14 @@ for (index, quantity) in mounth.enumerated() {
 print("")
 let jan = [("January", 31), ("Febriary", 28), ("March", 31), ("April", 30), ("May", 31), ("June", 30), ("July", 31), ("August", 31), ("September", 30), ("October", 31), ("November", 30), ("December", 31)]
 
-for i in 0...jan.count-1 {
+for i in 0..<jan.count {
     print("In \(jan[i].0) \(jan[i].1) days")
 }
 
 // Сделайте тоже самое, только выводите дни в обратном порядке (порядок в массиве не меняется)
 
 print("")
-for i in (0...jan.count-1).reversed() {
+for i in (0..<jan.count).reversed() {
     print("In \(jan[i].0) \(jan[i].1) days")
 }
 
@@ -102,22 +102,18 @@ print("Days have passed from the \(dayq) \(mounth[month - 1]): \(sumDays)\n")
  (Используйте и optional binding и forced unwrapping)
 */
 
-let mass = ["10", "20", "30dhj", "40", "50fio"]
-var optionalMass = [Int?]()
-for i in mass {
-    optionalMass.append(Int(i))
-}
+let mass: [Int?] = [10, 20, nil, 40, nil]
 
 var sum = 0
-for i in optionalMass {
-    if let int = i {
-        sum += int
+for i in mass {
+    if let i = i {
+        sum += i
     }
 }
 print("Optional Binding: \(sum)")
 
 sum = 0
-for i in optionalMass {
+for i in mass {
     if i != nil {
         sum += i!
     }
@@ -125,7 +121,7 @@ for i in optionalMass {
 print("Forced Unwrapping: \(sum)")
 
 sum = 0
-for i in optionalMass{
+for i in mass {
         sum += i ?? 0
 }
 print("?? : \(sum)\n")
@@ -138,8 +134,16 @@ print("?? : \(sum)\n")
 
 let alphabet = "abcdefghijklmnopqrstuvwxyz"
 var reverseAlphabet = [String]()
+var reverseAlphabet2 = [String]()
 
 for i in alphabet.reversed() {
     reverseAlphabet.append(String(i))
 }
 print(reverseAlphabet)
+
+// v.2
+for i in alphabet {
+    reverseAlphabet2.insert(String(i), at: 0)
+}
+print(reverseAlphabet2)
+
