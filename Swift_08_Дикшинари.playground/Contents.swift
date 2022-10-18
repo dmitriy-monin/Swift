@@ -28,7 +28,7 @@ for i in jornal.values {
     totalScope += i
 }
 
-var averageScore : Double = Double(totalScope) / Double(jornal.count)
+var averageScore = Double(totalScope) / Double(jornal.count)
 
 print("Total Scope:", totalScope)
 print("Averege Scope:", averageScore, "\n")
