@@ -25,22 +25,22 @@ print("")
 var number = 0
 for i in day {
     number += 1
-    print("In \(number) mounth \(i) days")
+    print("In \(number) month \(i) days")
 }
 
 // Используйте еще один массив с именами месяцев чтобы вывести название месяца + количество дней
 
 print("")
-let mounth = ["January", "Febriary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+let month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
-for (index, quantity) in mounth.enumerated() {
+for (index, quantity) in month.enumerated() {
     print("In \(quantity) \(day[index]) days")
 }
 
 // Сделайте тоже самое, но используя массив тюплов с параметрами (имя месяца, кол-во дней)
 
 print("")
-let jan = [("January", 31), ("Febriary", 28), ("March", 31), ("April", 30), ("May", 31), ("June", 30), ("July", 31), ("August", 31), ("September", 30), ("October", 31), ("November", 30), ("December", 31)]
+let jan = [("January", 31), ("February", 28), ("March", 31), ("April", 30), ("May", 31), ("June", 30), ("July", 31), ("August", 31), ("September", 30), ("October", 31), ("November", 30), ("December", 31)]
 
 for i in 0..<jan.count {
     print("In \(jan[i].0) \(jan[i].1) days")
@@ -56,16 +56,16 @@ for i in (0..<jan.count).reversed() {
 // Для произвольно выбранной даты (месяц и день) посчитайте количество дней до этой даты от начала года
 
 print("")
-let (daysToBirth, mounthToBirth) = (7, 12)
+let (daysToBirth, monthToBirth) = (7, 12)
 
 var sumDay = 0
-if 1 <= mounthToBirth && mounthToBirth <= 12 {
+if 1 <= monthToBirth && monthToBirth <= 12 {
     for i in 0...jan.count-1 {
-        if i == mounthToBirth-1 && daysToBirth <= jan[mounthToBirth-1].1 && daysToBirth > 0 {
+        if i == monthToBirth-1 && daysToBirth <= jan[monthToBirth-1].1 && daysToBirth > 0 {
             print("\(sumDay+daysToBirth) days before the specified date.")
             break
-        } else if daysToBirth > jan[mounthToBirth-1].1 || daysToBirth <= 0 {
-            print("ERROR! In \(jan[mounthToBirth-1].0) \(jan[mounthToBirth-1].1) days!")
+        } else if daysToBirth > jan[monthToBirth-1].1 || daysToBirth <= 0 {
+            print("ERROR! In \(jan[monthToBirth-1].0) \(jan[monthToBirth-1].1) days!")
             break
         }
         sumDay += jan[i].1
@@ -76,16 +76,16 @@ if 1 <= mounthToBirth && mounthToBirth <= 12 {
  
 // v.2
 
-let (month, dayq) = (12, 7)
-month
+let (month1, dayq) = (12, 7)
+month1
 dayq
-let monthIndex = month - 1
+let monthIndex = month1 - 1
 var sumDays = dayq
 for i in day[0..<monthIndex] {
     sumDays += i
 }
 
-print("Days have passed from the \(dayq) \(mounth[month - 1]): \(sumDays)\n")
+print("Days have passed from the \(dayq) \(month[month1 - 1]): \(sumDays)\n")
 
 /*
  2. Сделайте первое задание к уроку номер 4 используя массивы:
