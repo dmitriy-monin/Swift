@@ -69,10 +69,6 @@ let (letters, number) = (["a", "b", "c", "d", "e", "f", "g", "h"], 8)
 
 for i in 0..<letters.count {
     for j in 1...number {
-        if i % 2 == 0 && j % 2 != 0 || i % 2 != 0 && j % 2 == 0 {
-            chess[letters[i] + String(j)] = false
-        } else {
-            chess[letters[i] + String(j)] = true
-        }
+        chess[letters[i] + String(j)] = i % 2 != j % 2
     }
 }
