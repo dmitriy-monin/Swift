@@ -128,3 +128,34 @@ print(chess1(letter: "a", number: 1))
 /*
  3. Создайте функцию, которая принимает массив, а возвращает массив в обратном порядке. Можете создать еще одну, которая принимает последовательность и возвращает массив в обратном порядке. Чтобы не дублировать код, сделайте так, чтобы функция с последовательностью вызывала первую.
  */
+
+func reverseArray1(array: [Int]) -> [Int] {
+    
+    var reverse = [Int]()
+    
+    for i in array.reversed() {
+        reverse.append(i)
+    }
+    
+    return reverse
+}
+
+func reverseArray2(array: Int...) -> [Int] {
+    
+    var arrayMass = [Int]()
+    
+    for i in array {
+        arrayMass.append(i)
+    }
+    
+    var reverse = [Int]()
+    
+    for i in arrayMass.reversed() {
+        reverse.append(i)
+    }
+    
+    reverseArray1(array: reverse)
+    return reverse
+}
+
+reverseArray2(array: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
