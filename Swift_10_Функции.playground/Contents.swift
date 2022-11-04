@@ -130,32 +130,12 @@ print(chess1(letter: "a", number: 1))
  */
 
 func reverseArray1(array: [Int]) -> [Int] {
-    
-    var reverse = [Int]()
-    
-    for i in array.reversed() {
-        reverse.append(i)
-    }
-    
-    return reverse
+    return array.reversed()
 }
 
 func reverseArray2(array: Int...) -> [Int] {
-    
-    var arrayMass = [Int]()
-    
-    for i in array {
-        arrayMass.append(i)
-    }
-    
-    var reverse = [Int]()
-    
-    for i in arrayMass.reversed() {
-        reverse.append(i)
-    }
-    
-    reverseArray1(array: reverse)
-    return reverse
+    return reverseArray1(array: array)
 }
 
+reverseArray1(array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 reverseArray2(array: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
