@@ -87,8 +87,8 @@ let ship = (x: 3, y: 6, w: 0, h: 1)
 let shot = (x: 3, y: 7)
 
 switch shot {
-case (ship.x...ship.x+ship.w, ship.y...ship.y+ship.h) where ship.w > 0 || ship.h > 0: print("Ранил!")
-case (ship.x...ship.x+ship.w, ship.y...ship.y+ship.h) : print("Убил!")
+case (ship.x...ship.x + ship.w, ship.y...ship.y + ship.h) where ship.w > 0 || ship.h > 0: print("Ранил!")
+case (ship.x...ship.x + ship.w, ship.y...ship.y + ship.h) : print("Убил!")
 default:
     print("Мимо!")
 }
