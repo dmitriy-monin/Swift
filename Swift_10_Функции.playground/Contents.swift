@@ -139,3 +139,21 @@ func reverseArray2(array: Int...) -> [Int] {
 
 reverseArray1(array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 reverseArray2(array: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+/*
+ 4. Разберитесь с inout самостоятельно и выполните задание номер 3 так, чтобы функция не возвращала перевернутый массив, но меняла элементы в существующем. Что будет если убрать inout?
+ */
+
+func reverseArray3(array: inout [Int]) -> [Int] {
+    
+    var num = 6
+    for i in 0...4 {
+        array.remove(at: i)
+        array.insert(num, at: i)
+        num += 1
+    }
+    
+    return array
+}
+var array = [1, 2, 3, 4, 5]
+reverseArray3(array: &array)
