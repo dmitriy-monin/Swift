@@ -104,9 +104,7 @@ func chess(letter: String, number: Int) -> String {
     default:
         color = "White"
     }
-    
     return color
-    
 }
 
 func chess1(letter: String, number: Int) -> String {
@@ -117,13 +115,12 @@ func chess1(letter: String, number: Int) -> String {
         (letter == "b" || letter == "d" || letter == "f" || letter == "h") && number % 2 == 0 {
         color = "Black"
     } else {
-    color = "White"}
-    
+        color = "White"}
     return color
 }
 
 print(chess(letter: "a", number: 1))
-print(chess1(letter: "a", number: 1))
+print(chess1(letter: "a", number: 2))
 
 /*
  3. Создайте функцию, которая принимает массив, а возвращает массив в обратном порядке. Можете создать еще одну, которая принимает последовательность и возвращает массив в обратном порядке. Чтобы не дублировать код, сделайте так, чтобы функция с последовательностью вызывала первую.
@@ -146,14 +143,49 @@ reverseArray2(array: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
 func reverseArray3(array: inout [Int]) -> [Int] {
     
-    var num = 6
-    for i in 0...4 {
+    var num = array.endIndex + 1
+    for i in 0..<array.endIndex {
         array.remove(at: i)
         array.insert(num, at: i)
         num += 1
     }
-    
     return array
 }
-var array = [1, 2, 3, 4, 5]
+
+var array = [1, 2, 3, 4, 5, 6]
 reverseArray3(array: &array)
+
+/*
+ 5. Создайте функцию, которая принимает строку, убирает из нее все знаки препинания, делает все гласные большими буквами, согласные маленькими, а цифры меняет на соответствующие слова (9 -> nine и тд)
+ */
+
+var text = "I was born in Nizhny Novgorod. It is my hometown. I have been living here all my life. Let me tell you more about it.It is a very lively place, located in Central Russia? It was founded in 1221. Back then it used to be a major trading hub. People from all over the country came to Nizhny Novgorod to buy and sell goods! Now it has a population of one million and five hundred thousand citizens, it is the 6th biggest city in Russia.Nowadays it is a large city with a big city center and suburbs. A lot of companies have their headquarters in Nizhny Novgorod. It is one of the biggest economic centers in Russia."
+
+func restring(text: String) -> String {
+    
+    var finalText = ""
+    var lowerText = text.lowercased()
+    
+    for i in lowerText {
+        switch i {
+        case "a", "e", "i", "o", "u", "y": finalText += String(i).uppercased()
+        case "b", "c", "d", "f", "g", "h", "j", "k", "l", "m",
+            "n", "p", "q", "r", "s", "t", "v", "w", "x", "z": finalText += String(i)
+        case "0" : finalText += "zErO"
+        case "1" : finalText += "OnE"
+        case "2" : finalText += "TwO"
+        case "3" : finalText += "thrEE"
+        case "4" : finalText += "fOUr"
+        case "5" : finalText += "fIvE"
+        case "6" : finalText += "sIx"
+        case "7" : finalText += "sEvEn"
+        case "8" : finalText += "EIght"
+        case "9" : finalText += "nInE"
+        default:
+            finalText += " "
+        }
+    }
+    return(finalText)
+}
+
+print(restring(text: text))
