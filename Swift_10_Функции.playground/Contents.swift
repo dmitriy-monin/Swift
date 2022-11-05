@@ -88,39 +88,18 @@ print(heart() + " " + cat() + " " + sun())
  2. Опять шахматные клетки. Реализовать функцию, которая принимает букву и символ и возвращает строку “белая” или “черная”. Строку потом распечатайте в консоль
  */
 
+let letters = ["a":1, "b":2, "c":3, "d":4, "e":5, "f":6, "g":7, "h":8]
+let range = 0...8
+
 func chess(letter: String, number: Int) -> String {
-    
-    let color: String
-    
-    switch letter {
-    case "a" where number % 2 != 0,
-        "b" where number % 2 == 0,
-        "c" where number % 2 != 0,
-        "d" where number % 2 == 0,
-        "e" where number % 2 != 0,
-        "f" where number % 2 == 0,
-        "g" where number % 2 != 0,
-        "h" where number % 2 == 0: color = "Black"
-    default:
-        color = "White"
+    for i in letters.keys {
+        if letter == i && range ~= number {
+            return (letters[letter]! % 2 == number % 2) ? "Black" : "White"
+        }
     }
-    return color
+    return "ERROR!"
 }
-
-func chess1(letter: String, number: Int) -> String {
-    
-    let color: String
-    
-    if ((letter == "a" || letter == "c" || letter == "e" || letter == "g") && number % 2 != 0) ||
-        (letter == "b" || letter == "d" || letter == "f" || letter == "h") && number % 2 == 0 {
-        color = "Black"
-    } else {
-        color = "White"}
-    return color
-}
-
-print(chess(letter: "a", number: 1))
-print(chess1(letter: "a", number: 2))
+print(chess(letter: "a", number: 0))
 
 /*
  3. Создайте функцию, которая принимает массив, а возвращает массив в обратном порядке. Можете создать еще одну, которая принимает последовательность и возвращает массив в обратном порядке. Чтобы не дублировать код, сделайте так, чтобы функция с последовательностью вызывала первую.
@@ -165,22 +144,14 @@ func restring(text: String) -> String {
     
     var finalText = ""
     var lowerText = text.lowercased()
+    var numbers = [0:"zErO", 1:"OnE", 2:"TwO", 3:"thrEE", 4:"fOUr", 5:"fIvE", 6:"sIx", 7:"sEvEn", 8:"EIght", 9:"nInE"]
     
     for i in lowerText {
         switch i {
         case "a", "e", "i", "o", "u", "y": finalText += String(i).uppercased()
         case "b", "c", "d", "f", "g", "h", "j", "k", "l", "m",
             "n", "p", "q", "r", "s", "t", "v", "w", "x", "z": finalText += String(i)
-        case "0" : finalText += "zErO"
-        case "1" : finalText += "OnE"
-        case "2" : finalText += "TwO"
-        case "3" : finalText += "thrEE"
-        case "4" : finalText += "fOUr"
-        case "5" : finalText += "fIvE"
-        case "6" : finalText += "sIx"
-        case "7" : finalText += "sEvEn"
-        case "8" : finalText += "EIght"
-        case "9" : finalText += "nInE"
+        case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9": finalText += numbers[Int(String(i))!]!
         default:
             finalText += " "
         }
