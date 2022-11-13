@@ -118,7 +118,7 @@ array1.sorted(by: >)
 
 let mass = [1, 3, 8, 3, 6, 2, 9]
 
-func numb(mass: [Int], closure: (Int, Int?) -> Bool) -> Int {
+func nums(mass: [Int], closure: (Int, Int?) -> Bool) -> Int {
     var opt: Int?
     for i in mass {
         opt = closure(i, opt) ? i : opt
@@ -126,5 +126,64 @@ func numb(mass: [Int], closure: (Int, Int?) -> Bool) -> Int {
     return opt!
 }
 
-print("MIN = \(numb(mass: mass) {$1 == nil ? true : $0 < $1!})")
-print("MAX = \(numb(mass: mass) {$1 == nil ? true : $0 > $1!})")
+print("MIN = \(nums(mass: mass) {$1 == nil ? true : $0 < $1!})")
+print("MAX = \(nums(mass: mass) {$1 == nil ? true : $0 > $1!})")
+
+/*
+ 4. Создайте произвольную строку. Преобразуйте ее в массив букв. Используя метод массивов sorted отсортируйте строку так, чтобы вначале шли гласные в алфавитном порядке, потом согласные, потом цифры, а потом символы.
+ */
+
+let text = "jdgsUOaeEAaey9yguigt70-90/.,OU7gh,<>973234hjLfygoYUGog"
+
+let vowels = ["a", "e", "i", "o", "u", "y"]
+let consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "z"]
+let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+func priorChar(char: Character) -> Int{
+    switch String(char).lowercased() {
+    case let letter where vowels.contains(letter):
+        return 3
+    case let letter where consonants.contains(letter):
+        return 2
+    case let letter where digits.contains(letter):
+        return 1
+    default:
+        return 0
+    }
+}
+
+let arraySort = text.sorted {
+    let letter1 = String($0).lowercased()
+    let letter2 = String($1).lowercased()
+
+    let prior1 = priorChar(char: $0)
+    let prior2 = priorChar(char: $1)
+    if prior1 == prior2 {
+        return letter1 == letter2 ? $0 < $1 : letter1 < letter2
+    } else {
+        return prior1 > prior2
+    }
+}
+
+print(String(arraySort))
+
+/*
+ 5. Проделайте задание №3 но для нахождения минимальной и максимальной буквы из массива букв (соответственно скалярному значению)
+ */
+
+let str1: [Character] = ["q", "w", "e", "t", "r", "g", "h", "i", "o", "a", "b", "c", "u", "i", "u", "d", "g", "f", "s"]
+
+func chars(str1: [Character], closure: (Character, Character?) -> Bool) -> Character {
+    var char: Character?
+    for i in str1 {
+        char = closure(i, char) ? i : char
+    }
+    return char!
+}
+
+print("MIN.v1 = \(chars(str1: str1) {$1 == nil ? true : $0 < $1!})")
+print("MAX.v1 = \(chars(str1: str1) {$1 == nil ? true : $0 > $1!})")
+
+// v.2
+print("MIN.v2 = \(str1.sorted()[0])")
+print("MAX.v2 = \(str1.sorted(by: >)[0])")
