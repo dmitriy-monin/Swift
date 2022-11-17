@@ -123,11 +123,11 @@ func nums(mass: [Int], closure: (Int, Int?) -> Bool) -> Int {
     for i in mass {
         opt = closure(i, opt) ? i : opt
     }
-    return opt!
+    return opt ?? 0
 }
 
-print("MIN = \(nums(mass: mass) {$1 == nil ? true : $0 < $1!})")
-print("MAX = \(nums(mass: mass) {$1 == nil ? true : $0 > $1!})")
+print("MIN = \(nums(mass: mass) {$1 == nil || $0 < $1!})")
+print("MAX = \(nums(mass: mass) {$1 == nil || $0 > $1!})")
 
 /*
  4. Создайте произвольную строку. Преобразуйте ее в массив букв. Используя метод массивов sorted отсортируйте строку так, чтобы вначале шли гласные в алфавитном порядке, потом согласные, потом цифры, а потом символы.
@@ -135,33 +135,24 @@ print("MAX = \(nums(mass: mass) {$1 == nil ? true : $0 > $1!})")
 
 let text = "jdgsUOaeEAaey9yguigt70-90/.,OU7gh,<>973234hjLfygoYUGog"
 
-let vowels = ["a", "e", "i", "o", "u", "y"]
-let consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "z"]
-let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-
-func priorChar(char: Character) -> Int{
-    switch String(char).lowercased() {
-    case let letter where vowels.contains(letter):
-        return 3
-    case let letter where consonants.contains(letter):
-        return 2
-    case let letter where digits.contains(letter):
-        return 1
-    default:
+func priority(str: String) -> Int {
+    switch String(str).lowercased() {
+    case "a", "e", "i", "o", "u", "y":
         return 0
+    case "a"..."z":
+        return 1
+    case "0"..."9":
+        return 2
+    default:
+        return 3
     }
 }
 
 let arraySort = text.sorted {
-    let letter1 = String($0).lowercased()
-    let letter2 = String($1).lowercased()
-
-    let prior1 = priorChar(char: $0)
-    let prior2 = priorChar(char: $1)
-    if prior1 == prior2 {
-        return letter1 == letter2 ? $0 < $1 : letter1 < letter2
-    } else {
-        return prior1 > prior2
+    switch (priority(str: String($0)), priority(str: String($1))) {
+    case let (x, y) where x < y: return true
+    case let (x, y) where x > y: return false
+    default: return $0.lowercased() <= $1.lowercased()
     }
 }
 
@@ -187,3 +178,14 @@ print("MAX.v1 = \(chars(str1: str1) {$1 == nil ? true : $0 > $1!})")
 // v.2
 print("MIN.v2 = \(str1.sorted()[0])")
 print("MAX.v2 = \(str1.sorted(by: >)[0])")
+
+func makeIncrementer(amount: Int) ->  () -> Int {
+    var runningTotal = 0
+    func incrementer() -> Int {
+        runningTotal += amount
+        return runningTotal
+    }
+    return incrementer
+}
+let incrementByTen = makeIncrementer(amount: 10)
+incrementByTen()
