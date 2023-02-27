@@ -9,14 +9,14 @@ enum Figure: String {
 }
 
 enum Color: String {
-    case White = "Белый", Black = "Черный"
+    case White = "White", Black = "Black"
 }
 enum Vertical: String {
     case A, B, C, D, E, F, G, H
 }
 
 enum Horisontal: Int {
- case one, two, three, four, five, six, seven, eight
+    case one = 1, two, three, four, five, six, seven, eight
 }
 
 var whiteKing = (Figure.King, Color.White, Vertical.B, Horisontal.six)
@@ -50,7 +50,49 @@ PrintFigures(figures: figuresArray)
  3. Используя красивые юникодовые представления шахматных фигур, выведите в консоли вашу доску. Если клетка не содержит фигуры, то используйте белую или черную клетку. Это должна быть отдельная функция, которая распечатывает доску с фигурами (принимает массив фигур и ничего не возвращает)
  */
 
+func ChessDesk (figures: [Figures]) {
+    var horisontal = 8
+    while horisontal > 0 {
+        for vertical in "ABCDEFGH" {
+            var empty = true
+            for figure in figures {
+                if figure.2.rawValue == String(vertical) && figure.3.rawValue == horisontal {
+                    switch figure {
+                    case let figure where figure.0 == .King: figure.1.rawValue == "White" ? print(" ♔ ", terminator: "") : print(" ♚ ", terminator: "")
+                    case let figure where figure.0 == .Pawn: figure.1.rawValue == "White" ? print(" ♙ ", terminator: "") : print(" ♟ ", terminator: "")
+                    case let figure where figure.0 == .Rook: figure.1.rawValue == "White" ? print(" ♖ ", terminator: "") : print(" ♜ ", terminator: "")
+                    case let figure where figure.0 == .Knight: figure.1.rawValue == "White" ? print(" ♘ ", terminator: "") : print(" ♞ ", terminator: "")
+                    case let figure where figure.0 == .Bishop: figure.1.rawValue == "White" ? print(" ♗ ", terminator: "") : print(" ♝ ", terminator: "")
+                    case let figure where figure.0 == .Queen: figure.1.rawValue == "White" ? print(" ♕ ", terminator: "") : print(" ♛ ", terminator: "")
+                    case (_, _, _, _):
+                        0
+                    }
+                    empty = !empty
+                }
+            }
+            var vert = 0
+            switch vertical {
+            case "A" : vert = 1
+            case "B" : vert = 2
+            case "C" : vert = 3
+            case "D" : vert = 4
+            case "E" : vert = 5
+            case "F" : vert = 6
+            case "G" : vert = 7
+            case "H" : vert = 8
+            default:
+                0
+            }
+            if empty {
+                print((horisontal + vert) % 2 == 0 ? "⬛" : "⬜", terminator: "")
+            }
+        }
+        print("\n")
+        horisontal = horisontal - 1
+    }
+}
 
+ChessDesk(figures: figuresArray)
 
 
 /*
@@ -62,42 +104,3 @@ PrintFigures(figures: figuresArray)
 /*
  5. Следите чтобы ваш код был красивым!
  */
-
-
-enum ChessColor: String {
-    case  white, black
-}
-enum ChessLetter: String {
-    case a , b, c, d, e, f, g, h
-}
-
-enum ChessDigit: Int {
- case one = 1 , two, three, four, five, six, seven, eight
-}
-
-enum ChessType: String {
-    case rook, knight, bishop, pawn, king, queen
-    
-}
-typealias ChessFigure = (ChessType,ChessColor, ChessLetter, ChessDigit)
-
-
-var whiteKing2: ChessFigure = (ChessType.king, ChessColor.white, ChessLetter.b, ChessDigit.one)
-var whiteRook1: ChessFigure = (ChessType.rook, ChessColor.white, ChessLetter.d, ChessDigit.seven)
-var whiteRook2: ChessFigure = (ChessType.rook, ChessColor.white, ChessLetter.e, ChessDigit.eight)
-var blackKing2: ChessFigure = (ChessType.king, ChessColor.black, ChessLetter.f, ChessDigit.eight)
-
-let figureArray = [whiteKing2, whiteRook1, whiteRook2, blackKing2]
-
-/*
- 2
- */
-
-
-func descriptionFigures(figureArray array: [ChessFigure]) {
-    for figure in array {
-        print(figure.0, figure.1, figure.2, figure.3.rawValue)
-    }
-}
-
-descriptionFigures(figureArray: figureArray)
