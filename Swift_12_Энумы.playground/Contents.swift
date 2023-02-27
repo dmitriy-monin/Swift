@@ -53,6 +53,7 @@ PrintFigures(figures: figuresArray)
 func ChessDesk (figures: [Figures]) {
     var horisontal = 8
     while horisontal > 0 {
+        print("\(horisontal) ", terminator: "")
         for vertical in "ABCDEFGH" {
             var empty = true
             for figure in figures {
@@ -64,7 +65,7 @@ func ChessDesk (figures: [Figures]) {
                     case let figure where figure.0 == .Knight: figure.1.rawValue == "White" ? print(" ♘ ", terminator: "") : print(" ♞ ", terminator: "")
                     case let figure where figure.0 == .Bishop: figure.1.rawValue == "White" ? print(" ♗ ", terminator: "") : print(" ♝ ", terminator: "")
                     case let figure where figure.0 == .Queen: figure.1.rawValue == "White" ? print(" ♕ ", terminator: "") : print(" ♛ ", terminator: "")
-                    case (_, _, _, _):
+                    default:
                         0
                     }
                     empty = !empty
@@ -87,9 +88,10 @@ func ChessDesk (figures: [Figures]) {
                 print((horisontal + vert) % 2 == 0 ? "⬛" : "⬜", terminator: "")
             }
         }
-        print("\n")
+        print("")
         horisontal = horisontal - 1
     }
+    print("   A B C D E F G H")
 }
 
 ChessDesk(figures: figuresArray)
@@ -99,6 +101,15 @@ ChessDesk(figures: figuresArray)
  4. Создайте функцию, которая будет принимать шахматную фигуру и тюпл новой позиции. Эта функция должна передвигать фигуру на новую позицию, причем перемещение должно быть легальным: нельзя передвинуть фигуру за пределы поля и нельзя двигать фигуры так, как нельзя их двигать в реальных шахматах (для мегамонстров программирования). Вызовите эту функцию для нескольких фигур и распечатайте поле снова.
  */
 
+func CheesGo(figure: Figures, newPosition: (Vertical, Horisontal)) -> Figures {
+    let figure = (figure.0, figure.1, newPosition.0, newPosition.1)
+    return figure
+}
+
+blackKing = CheesGo(figure: blackKing, newPosition: (.B, .eight))
+
+figuresArray = [whiteKing, blackKing, whiteBishop1, whiteBishop2]
+ChessDesk(figures: figuresArray)
 
 
 /*
