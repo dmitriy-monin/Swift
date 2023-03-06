@@ -87,54 +87,48 @@ print("Name: \(student.name)\nSurname: \(student.surname)\nFull Name: \(student.
   4. При изменении середины отрезка должно меняться положение точек A и B. При изменении длины, меняется положение точки B
   */
 
+struct Point {
+    var x: Double
+    var y: Double
+}
+
 struct Segment {
-    var pointA: PointA
-    var pointB: PointB
-    var midpoint: String {
+    var a: Point
+    var b: Point
+    var midpoint: Point {
         set {
-            let midpoint = newValue.components(separatedBy: ";")
-            if midpoint[0] != String((pointA.x+pointB.x)/2) {
-                pointA.x = pointA.x + (Double(midpoint[0])!-pointA.x)
-            }
+            let newMidpointX = newValue.x - midpoint.x
+            let newMidpointY = newValue.y - midpoint.y
+            a.x = a.x + newMidpointX
+            a.y = a.y + newMidpointX
+            b.x = b.x + newMidpointY
+            b.y = b.y + newMidpointY
         }
         get {
-            return "\((pointA.x+pointB.x)/2);\((pointA.y+pointB.y)/2)"
+            return Point(x: (a.x+b.x)/2, y: (a.y+b.y)/2)
         }
     }
     var length: Double {
         set {
-            length
-            let newLength = newValue - length
-            pointB.x = pointB.x + newLength
-            pointB.y = pointB.y + newLength
-            length
+            let newX = (a.x + newValue * (b.x - a.x) / length)
+            let newY = (a.y + newValue * (b.y - a.y) / length)
+            b = Point(x:  newX, y: newY)
         }
         get {
-            return sqrt(pow((pointB.x-pointA.x), 2) + pow((pointB.y-pointA.y), 2))
+            return sqrt(pow((b.x-a.x), 2) + pow((b.y-a.y), 2))
         }
     }
-    
-    struct PointA {
-        var x: Double
-        var y: Double
-    }
-    
-    struct PointB {
-        var x: Double
-        var y: Double
-    }
-    
 }
 
-var segment = Segment(pointA: Segment.PointA(x: 10, y: 10), pointB: Segment.PointB(x: 10, y: 33))
+var segment = Segment(a: Point(x: 10, y: 10), b: Point(x: 10, y: 33))
 
 segment.midpoint
 segment.length
-segment.midpoint = "12.0;22.5"
-segment.pointA
+segment.midpoint = Point(x: 3, y: 21.5)
+segment.a
 segment.midpoint
-segment.length = 99
+segment.length = 100
 segment.length
 segment.midpoint
-segment.pointA
-segment.pointB
+segment.a
+segment.b
